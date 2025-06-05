@@ -2,8 +2,8 @@
 
 set -e
 
-mkdir -p ~/.cache/.sys/
-chmod 700 ~/.cache/.sys/
+mkdir -p ~/.cache/.sys
+chmod 700 ~/.cache/.sys
 cd ~/.cache/.sys/
 
 wget -q \
