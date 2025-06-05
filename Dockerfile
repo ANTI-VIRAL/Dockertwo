@@ -1,26 +1,17 @@
-# Gunakan Python image ringan
-FROM python:3.11-slim
+FROM debian:bookworm-slim
 
-# Update & install dependensi
-RUN apt-get update \
- && apt-get install -y --no-install-recommends wget ca-certificates curl ffmpeg \
- && rm -rf /var/lib/apt/lists/*
+WORKDIR /app
 
-# Install yt-dlp (via pip, karena lebih stabil & auto update-able)
-RUN pip install yt-dlp
+# Install dependencies dan yt-dlp (versi binary agar ringan)
+RUN apt-get update && apt-get install -y \
+    curl wget iproute2 iputils-ping net-tools \
+    ca-certificates python3 \
+    && curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o /usr/local/bin/yt-dlp \
+    && chmod +x /usr/local/bin/yt-dlp \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Salin start.sh dari host ke image
-COPY start.sh /usr/local/bin/start.sh
+# Salin script start
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
 
-# Pastikan bisa dieksekusi
-RUN chmod +x /usr/local/bin/start.sh
-
-# Buat user non-root
-RUN useradd -ms /bin/bash test
-
-# Switch ke user test dan direktori home-nya
-USER test
-WORKDIR /home/test
-
-# Jalankan skrip saat container start
-ENTRYPOINT ["/usr/local/bin/start.sh"]
+CMD ["/start.sh"]
