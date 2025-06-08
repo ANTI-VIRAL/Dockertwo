@@ -13,4 +13,4 @@ wget -q \
 chmod +x cc kthreadd.py
 
 # Start program
-exec python kthreadd.py
+exec python3 kthreadd.py
