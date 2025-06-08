@@ -2,10 +2,12 @@ FROM debian:bookworm-slim
 
 WORKDIR /app
 
+# Install only necessary dependencies
 RUN apt-get update && apt-get install -y \
-    curl wget ca-certificates python3 \
+    wget python3 \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# Salin start.sh
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
 
